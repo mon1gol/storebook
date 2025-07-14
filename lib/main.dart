@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 void main() {
   runApp(const StoreBookApp());
@@ -30,6 +31,7 @@ class StoreBookApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFFF0EAD2),
           foregroundColor: Color.fromARGB(255, 72, 59, 51),
+          centerTitle: true
         ),
       
       ),
@@ -78,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
             "Подобрали для вас",
             style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
           ),
+          leading: SvgPicture.asset('assets/svg/logo__books.svg', height: 50, width: 50),
         ),
       ),
 
