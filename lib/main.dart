@@ -36,21 +36,21 @@ class StoreBookApp extends StatelessWidget {
       
       ),
 
-      home: const MyHomePage(title: 'Книжная Лавка'),
+      home: const BookListScreen(title: 'Книжная Лавка'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class BookListScreen extends StatefulWidget {
+  const BookListScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BookListScreen> createState() => _BookListScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BookListScreenState extends State<BookListScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -78,12 +78,37 @@ class _MyHomePageState extends State<MyHomePage> {
             style: theme.textTheme.titleMedium,
           ),
           subtitle: Text(
-            "Подобрали для вас",
+            "Автор ${i + 1}",
             style: theme.textTheme.bodyMedium,
           ),
 
           leading: SvgPicture.asset('assets/svg/logo__books.svg', height: 50, width: 50),
+
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder:(context) => BookDetailScreen(bookTitle: 'Книга №${i + 1}', bookSubtitle: 'Автор ${i + 1}',),
+              )
+            );
+          }
         ),
+      ),
+    );
+  }
+}
+
+class BookDetailScreen extends StatelessWidget {
+  const BookDetailScreen({super.key, required this.bookTitle, required this.bookSubtitle});
+
+  final String bookTitle;
+  final String bookSubtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(bookTitle),
       ),
     );
   }
