@@ -51,14 +51,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -69,25 +61,29 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
 
-      body: ListView.builder(
-        itemCount: 1,
+      body: ListView.separated(
+        itemCount: 10,
+        separatorBuilder: (context, index) => Divider(),
         itemBuilder: (context, i) => ListTile(
+          // title: Text(
+          //   'Бестселлеры',
+          //   style: theme.textTheme.titleLarge, textAlign: TextAlign.center,
+          // ),
+          // subtitle: Text(
+          //   "Подобрали для вас",
+          //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
+          // ),
           title: Text(
-            'Бестселлеры',
-            style: theme.textTheme.titleLarge, textAlign: TextAlign.center,
+            'Книга №${i + 1}',
+            style: theme.textTheme.titleMedium,
           ),
           subtitle: Text(
             "Подобрали для вас",
-            style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
+            style: theme.textTheme.bodyMedium,
           ),
+
           leading: SvgPicture.asset('assets/svg/logo__books.svg', height: 50, width: 50),
         ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
