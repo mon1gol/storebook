@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storebook/services/book_service.dart';
 import '../widgets/index.dart';
 
 class BookListScreen extends StatefulWidget {
@@ -27,6 +28,13 @@ class _BookListScreenState extends State<BookListScreen> {
         itemBuilder: (context, i) {
           return ItemsListTile(theme: theme, index: i);
         }
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          BookService().getBookList();
+        },
+        child: Icon(Icons.download),
       ),
     );
   }
