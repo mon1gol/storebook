@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storebook/models/book.dart';
 import 'package:storebook/services/book_service.dart';
 import '../widgets/index.dart';
 
@@ -12,6 +13,8 @@ class BookListScreen extends StatefulWidget {
 }
 
 class _BookListScreenState extends State<BookListScreen> {
+  List<Book>? _listBooks;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -22,17 +25,23 @@ class _BookListScreenState extends State<BookListScreen> {
         title: Text(widget.title),
       ),
 
-      body: ListView.separated(
-        itemCount: 10,
-        separatorBuilder: (context, index) => Divider(),
-        itemBuilder: (context, i) {
-          return ItemsListTile(theme: theme, index: i);
-        }
-      ),
+      body: (_listBooks == null)
+      ? SizedBox()
+      : ListView.separated(
+          itemCount: _listBooks!.length,
+          separatorBuilder: (context, index) => Divider(),
+          itemBuilder: (context, i) {
+            final title = _listBooks![i].title;
+            final subtitle = _listBooks![i].authors;
+            final thumbnail = _listBooks![i].thumbnail;
+            return ItemsListTile(theme: theme, title: title, subtitle: subtitle.toString(), thumbnail: thumbnail);
+          }
+        ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          BookService().getBookList();
+        onPressed: () async {
+          _listBooks = await BookService().getBookList();
+          setState(() {});
         },
         child: Icon(Icons.download),
       ),

@@ -17,7 +17,7 @@ class BookService {
         title: volumeInfo['title'] ?? 'Без названия',
         authors: (volumeInfo['authors'] as List?)?.cast<String>() ?? [],
         description: volumeInfo['description'] ?? 'Описание отсутствует',
-        thumbnail: volumeInfo['imageLinks']?['thumbnail'],
+        thumbnail: volumeInfo['previewLink'],
       );
     }).toList();
 
