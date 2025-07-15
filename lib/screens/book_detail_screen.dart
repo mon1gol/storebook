@@ -19,11 +19,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     final args = ModalRoute.of(context)?.settings.arguments;
 
     if(args != null && args is String){
-      bookTitle = args as String;
-      bookSubtitle = args as String;
+      bookTitle = args;
+      bookSubtitle = args;
       setState(() {});
     } else {
-      print('BookDetailScreen error: недостататочно аргументов или неправильный формат аргументов');
       return;
     }
 
