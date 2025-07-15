@@ -1,3 +1,6 @@
+import 'dart:ffi';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -33,10 +36,13 @@ class StoreBookApp extends StatelessWidget {
           foregroundColor: Color.fromARGB(255, 72, 59, 51),
           centerTitle: true
         ),
-      
       ),
 
-      home: const BookListScreen(title: 'Книжная Лавка'),
+      routes: {
+        '/' :(context) => BookListScreen(title: 'Книжная Лавка'),
+        '/detail' :(context) => BookDetailScreen(bookTitle: '', bookSubtitle: '',)
+      },
+
     );
   }
 }
@@ -64,51 +70,76 @@ class _BookListScreenState extends State<BookListScreen> {
       body: ListView.separated(
         itemCount: 10,
         separatorBuilder: (context, index) => Divider(),
-        itemBuilder: (context, i) => ListTile(
-          // title: Text(
-          //   'Бестселлеры',
-          //   style: theme.textTheme.titleLarge, textAlign: TextAlign.center,
-          // ),
-          // subtitle: Text(
-          //   "Подобрали для вас",
-          //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
-          // ),
-          title: Text(
-            'Книга №${i + 1}',
-            style: theme.textTheme.titleMedium,
-          ),
-          subtitle: Text(
-            "Автор ${i + 1}",
-            style: theme.textTheme.bodyMedium,
-          ),
+        itemBuilder: (context, i) {
+          return ListTile(
+            // title: Text(
+            //   'Бестселлеры',
+            //   style: theme.textTheme.titleLarge, textAlign: TextAlign.center,
+            // ),
+            // subtitle: Text(
+            //   "Подобрали для вас",
+            //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
+            // ),
+            title: Text(
+              'Книга №${i + 1}',
+              style: theme.textTheme.titleMedium,
+            ),
+            subtitle: Text(
+              "Автор ${i + 1}",
+              style: theme.textTheme.bodyMedium,
+            ),
 
-          leading: SvgPicture.asset('assets/svg/logo__books.svg', height: 50, width: 50),
+            leading: SvgPicture.asset('assets/svg/logo__books.svg', height: 50, width: 50),
 
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder:(context) => BookDetailScreen(bookTitle: 'Книга №${i + 1}', bookSubtitle: 'Автор ${i + 1}',),
-              )
-            );
-          }
-        ),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                '/detail', 
+                arguments: "Книга №${i + 1}", 
+              );
+            }
+          );
+        }
       ),
     );
   }
 }
 
-class BookDetailScreen extends StatelessWidget {
+class BookDetailScreen extends StatefulWidget {
   const BookDetailScreen({super.key, required this.bookTitle, required this.bookSubtitle});
 
   final String bookTitle;
   final String bookSubtitle;
 
   @override
+  State<BookDetailScreen> createState() => _BookDetailScreenState();
+}
+
+class _BookDetailScreenState extends State<BookDetailScreen> {
+  String? bookTitle;
+  String? bookSubtitle;
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if(args != null && args is String){
+      bookTitle = args as String;
+      bookSubtitle = args as String;
+      setState(() {});
+    } else {
+      print('BookDetailScreen error: недостататочно аргументов или неправильный формат аргументов');
+      return;
+    }
+
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(bookTitle),
+        title: Text(bookTitle ?? '...'),
       ),
     );
   }
