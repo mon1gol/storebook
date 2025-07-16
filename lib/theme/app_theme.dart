@@ -10,15 +10,15 @@ final darkTheme = ThemeData(
     bodySmall: TextStyle(color: Color(0xFFA98467)),
     
     titleLarge: TextStyle(
-      color: Color.fromARGB(255, 72, 59, 51),
+      color: Color(0xFF483B33),
       fontWeight: FontWeight.bold,
     ),
     titleMedium: TextStyle(
-      color: Color.fromARGB(255, 72, 59, 51),
+      color: Color(0xFF483B33),
       fontWeight: FontWeight.bold,
     ),
     titleSmall: TextStyle(
-      color: Color.fromARGB(255, 72, 59, 51),
+      color: Color(0xFF483B33),
       fontWeight: FontWeight.bold,
     ),
   ),
@@ -28,7 +28,7 @@ final darkTheme = ThemeData(
 
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xFFF0EAD2),
-    foregroundColor: Color.fromARGB(255, 72, 59, 51),
+    foregroundColor: Color(0xFF483B33),
     centerTitle: true,
   ),
 );

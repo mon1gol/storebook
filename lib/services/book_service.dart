@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:storebook/models/book.dart';
 
 class BookService {
-  Future<List<Book>> getBookList() async {
+  Future<List<Book>> getBooksListNewest() async {
     final apiKey = 'AIzaSyBtPU8LpXihkINUIU2t80py61OqRBgaTRI';
 
     try {
@@ -30,7 +30,7 @@ class BookService {
       return bookList;
 
     } catch (e, stackTrace) {
-      debugPrint('BookService - getBookList error: $e\n$stackTrace');
+      debugPrint('BookService - getBooksListNewest error: $e\n$stackTrace');
       throw Exception('Ошибка загрузки книг: $e');
     }
   }

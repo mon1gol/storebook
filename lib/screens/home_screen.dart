@@ -16,6 +16,12 @@ class _BookListScreenState extends State<BookListScreen> {
   List<Book>? _listBooks;
 
   @override
+  void initState() {
+    _getNewestBooks();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
@@ -26,8 +32,9 @@ class _BookListScreenState extends State<BookListScreen> {
       ),
 
       body: (_listBooks == null)
-      ? SizedBox()
+      ? Center(child: const CircularProgressIndicator())
       : ListView.separated(
+          padding: const EdgeInsets.only(top: 16),
           itemCount: _listBooks!.length,
           separatorBuilder: (context, index) => Divider(),
           itemBuilder: (context, i) {
@@ -42,14 +49,11 @@ class _BookListScreenState extends State<BookListScreen> {
             );
           }
         ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          _listBooks = await BookService().getBookList();
-          setState(() {});
-        },
-        child: Icon(Icons.download),
-      ),
     );
+  }
+
+  Future<void> _getNewestBooks() async {
+    _listBooks = await BookService().getBooksListNewest();
+    setState(() {});
   }
 }

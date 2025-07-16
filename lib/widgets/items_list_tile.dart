@@ -18,7 +18,7 @@ class ItemsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fillThumbnail = SvgPicture.asset(
-      'assets/svg/logo__books.svg',
+      'assets/svg/home__book.svg',
       height: 50,
       width: 50,
     );
