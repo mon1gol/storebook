@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:storebook/data/models/book.dart';
+import 'package:storebook/data/repositories/index.dart';
 
-class BookRepository {
-  Future<List<Book>> getBooksListNewest() async {
+class BookRepository implements AbstractBookRepository {
+  @override
+  Future<List<Book>> getBooksList() async {
     final apiKey = 'AIzaSyBtPU8LpXihkINUIU2t80py61OqRBgaTRI';
 
     try {
@@ -30,7 +32,7 @@ class BookRepository {
       return bookList;
 
     } catch (e, stackTrace) {
-      debugPrint('BookRepository - getBooksListNewest error: $e\n$stackTrace');
+      debugPrint('BookRepository - getBooksList error: $e\n$stackTrace');
       throw Exception('Ошибка загрузки книг: $e');
     }
   }

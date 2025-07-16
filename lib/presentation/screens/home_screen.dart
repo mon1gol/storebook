@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:storebook/data/models/book.dart';
-import 'package:storebook/data/repositories/book_repository.dart';
-import '../widgets/index.dart';
+import 'package:storebook/data/repositories/index.dart';
+import 'package:storebook/presentation/widgets/index.dart';
 
 class BookListScreen extends StatefulWidget {
   const BookListScreen({super.key, required this.title});
@@ -53,7 +54,7 @@ class _BookListScreenState extends State<BookListScreen> {
   }
 
   Future<void> _getNewestBooks() async {
-    _listBooks = await BookRepository().getBooksListNewest();
+    _listBooks = await GetIt.I<BookRepository>().getBooksList();
     setState(() {});
   }
 }
