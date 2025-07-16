@@ -54,7 +54,7 @@ class _BookListScreenState extends State<BookListScreen> {
   }
 
   Future<void> _getNewestBooks() async {
-    _listBooks = await GetIt.I<BookRepository>().getBooksList();
+    _listBooks = await GetIt.I<AbstractBookRepository>().getBooksList();
     setState(() {});
   }
 }
