@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:storebook/routes/app_router.dart';
+import 'package:storebook/presentation/routes/app_routes.dart';
 import 'package:storebook/theme/app_theme.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:storebook/models/book.dart';
-import 'package:storebook/services/book_service.dart';
+import 'package:storebook/data/models/book.dart';
+import 'package:storebook/data/repositories/book_repository.dart';
 import '../widgets/index.dart';
 
 class BookListScreen extends StatefulWidget {

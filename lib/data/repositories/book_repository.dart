@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
-import 'package:storebook/models/book.dart';
+import 'package:storebook/data/models/book.dart';
 
 class BookService {
   Future<List<Book>> getBooksListNewest() async {
