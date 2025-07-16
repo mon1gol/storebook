@@ -7,7 +7,7 @@ class ItemsListTile extends StatelessWidget {
     required this.theme,
     required this.title,
     required this.subtitle,
-    this.thumbnail = ''
+    this.thumbnail = '',
   });
 
   final ThemeData theme;
@@ -17,6 +17,12 @@ class ItemsListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fillThumbnail = SvgPicture.asset(
+      'assets/svg/logo__books.svg',
+      height: 50,
+      width: 50,
+    );
+
     return ListTile(
       // title: Text(
       //   'Бестселлеры',
@@ -26,23 +32,24 @@ class ItemsListTile extends StatelessWidget {
       //   "Подобрали для вас",
       //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
       // ),
-      title: Text(
-        title,
-        style: theme.textTheme.titleMedium,
-      ),
-      subtitle: Text(
-        subtitle,
-        style: theme.textTheme.bodyMedium,
-      ),
-    
-      leading: thumbnail != '' ? SvgPicture.network(thumbnail) : SvgPicture.asset('assets/svg/logo__books.svg', height: 50, width: 50),
-    
+      title: Text(title, style: theme.textTheme.titleMedium),
+      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
+
+      leading: thumbnail.isNotEmpty && thumbnail != ''
+          ? Image.network(
+              thumbnail,
+              height: 50,
+              width: 50,
+              errorBuilder: (context, error, stackTrace) {
+                debugPrint('ItemsListTile error: $error\n$stackTrace');
+                return fillThumbnail;
+              },
+            )
+          : fillThumbnail,
+
       onTap: () {
-        Navigator.of(context).pushNamed(
-          '/detail', 
-          arguments: title, 
-        );
-      }
+        Navigator.of(context).pushNamed('/detail', arguments: title);
+      },
     );
   }
 }

@@ -32,9 +32,14 @@ class _BookListScreenState extends State<BookListScreen> {
           separatorBuilder: (context, index) => Divider(),
           itemBuilder: (context, i) {
             final title = _listBooks![i].title;
-            final subtitle = _listBooks![i].authors;
+            final subtitle = _listBooks![i].authors.join(', ');
             final thumbnail = _listBooks![i].thumbnail;
-            return ItemsListTile(theme: theme, title: title, subtitle: subtitle.toString(), thumbnail: thumbnail);
+            return ItemsListTile(
+              theme: theme, 
+              title: title, 
+              subtitle: subtitle.toString(), 
+              thumbnail: thumbnail
+            );
           }
         ),
 
