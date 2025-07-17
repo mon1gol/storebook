@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:storebook/data/models/book.dart';
 import 'package:storebook/data/repositories/index.dart';
+import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
 import 'package:storebook/presentation/widgets/index.dart';
 
 class BookListScreen extends StatefulWidget {
@@ -14,11 +15,11 @@ class BookListScreen extends StatefulWidget {
 }
 
 class _BookListScreenState extends State<BookListScreen> {
-  List<Book>? _listBooks;
+  final _bookListBloc = BookListBloc(GetIt.I<AbstractBookRepository>());
 
   @override
   void initState() {
-    _getNewestBooks();
+    _bookListBloc.add(LoadBookList());
     super.initState();
   }
 
@@ -32,29 +33,51 @@ class _BookListScreenState extends State<BookListScreen> {
         title: Text(widget.title),
       ),
 
-      body: (_listBooks == null)
-      ? Center(child: const CircularProgressIndicator())
-      : ListView.separated(
-          padding: const EdgeInsets.only(top: 16),
-          itemCount: _listBooks!.length,
-          separatorBuilder: (context, index) => Divider(),
-          itemBuilder: (context, i) {
-            final title = _listBooks![i].title;
-            final subtitle = _listBooks![i].authors.join(', ');
-            final thumbnail = _listBooks![i].thumbnail;
-            return ItemsListTile(
-              theme: theme, 
-              title: title, 
-              subtitle: subtitle.toString(), 
-              thumbnail: thumbnail
+      body: BlocBuilder<BookListBloc, BookListState>(
+        bloc: _bookListBloc,
+
+        builder: (context, state) {
+          if(state is BookListLoaded){
+            return ListView.separated(
+              padding: const EdgeInsets.only(top: 16),
+              itemCount: state.bookList.length,
+              separatorBuilder: (context, index) => Divider(),
+
+              itemBuilder: (context, i) {
+                final title = state.bookList[i].title;
+                final subtitle = state.bookList[i].authors.join(', ');
+                final thumbnail = state.bookList[i].thumbnail;
+                return ItemsListTile(
+                  theme: theme, 
+                  title: title, 
+                  subtitle: subtitle.toString(), 
+                  thumbnail: thumbnail
+                );
+              }
             );
           }
-        ),
+          if (state is BookListLoadingFail) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset('assets/img/error__okak.jpg', height: 256, width: 256),
+                  Text(
+                    'Произошла ошибка при загрузке данных',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  Text(
+                    'Проверьте подключение к интернету',
+                    style: theme.textTheme.bodyMedium,
+                  )
+                ],
+              )
+            );
+          }
+          return Center(child: const CircularProgressIndicator());
+        },
+      )
     );
-  }
-
-  Future<void> _getNewestBooks() async {
-    _listBooks = await GetIt.I<AbstractBookRepository>().getBooksList();
-    setState(() {});
   }
 }
