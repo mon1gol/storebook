@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:storebook/data/models/book.dart';
 
 class ItemsListTile extends StatelessWidget {
   const ItemsListTile({
-    super.key,
+    super.key, 
     required this.theme,
-    required this.title,
-    required this.subtitle,
-    this.thumbnail = '',
+    required this.book
   });
 
+  final Book book;
   final ThemeData theme;
-  final String title;
-  final String subtitle;
-  final String thumbnail;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +29,12 @@ class ItemsListTile extends StatelessWidget {
       //   "Подобрали для вас",
       //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
       // ),
-      title: Text(title, style: theme.textTheme.titleMedium),
-      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
+      title: Text(book.title, style: theme.textTheme.titleMedium),
+      subtitle: Text(book.authors.join(', '), style: theme.textTheme.bodyMedium),
 
-      leading: thumbnail.isNotEmpty && thumbnail != ''
+      leading: book.thumbnail.isNotEmpty && book.thumbnail != ''
           ? Image.network(
-              thumbnail,
+              book.thumbnail,
               height: 50,
               width: 50,
               errorBuilder: (context, error, stackTrace) {
@@ -48,7 +45,7 @@ class ItemsListTile extends StatelessWidget {
           : fillThumbnail,
 
       onTap: () {
-        Navigator.of(context).pushNamed('/detail', arguments: title);
+        Navigator.of(context).pushNamed('/detail', arguments: book);
       },
     );
   }

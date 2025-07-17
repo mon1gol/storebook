@@ -34,7 +34,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(bookTitle ?? '...'),
       ),
     );
   }

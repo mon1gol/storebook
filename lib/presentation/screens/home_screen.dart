@@ -57,9 +57,7 @@ class _BookListScreenState extends State<BookListScreen> {
                   final thumbnail = state.bookList[i].thumbnail;
                   return ItemsListTile(
                     theme: theme,
-                    title: title,
-                    subtitle: subtitle.toString(),
-                    thumbnail: thumbnail,
+                    book: state.bookList[i],
                   );
                 },
               );
