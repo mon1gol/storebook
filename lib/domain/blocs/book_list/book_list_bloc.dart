@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:storebook/data/models/book.dart';
 import 'package:storebook/data/repositories/abstract_book_repository.dart';
