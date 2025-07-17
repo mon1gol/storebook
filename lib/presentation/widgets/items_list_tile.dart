@@ -30,7 +30,7 @@ class ItemsListTile extends StatelessWidget {
       //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
       // ),
       title: Text(book.title, style: theme.textTheme.titleMedium),
-      subtitle: Text(book.authors.join(', '), style: theme.textTheme.bodyMedium),
+      subtitle: Text(book.authors.join(', '), style: theme.textTheme.labelLarge),
 
       leading: book.thumbnail.isNotEmpty && book.thumbnail != ''
           ? Image.network(
