@@ -39,7 +39,7 @@ class _BookListScreenState extends State<BookListScreen> {
         onRefresh: () async {
           final completer = Completer();
           _bookListBloc.add(LoadBookList(completer: completer));
-          completer.future;
+          return completer.future;
         },
         child: BlocBuilder<BookListBloc, BookListState>(
           bloc: _bookListBloc,

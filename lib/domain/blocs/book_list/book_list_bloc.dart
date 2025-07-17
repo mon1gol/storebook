@@ -11,7 +11,9 @@ class BookListBloc extends Bloc<BookListEvent, BookListState> {
   BookListBloc(this.bookRepository) : super(BookListInitial()) {
     on<LoadBookList>((event, emit) async {
       try {
-        emit(BookListLoading());
+        if (state is! BookListLoaded) {
+          emit(BookListLoading());          
+        }
 
         final bookList = await bookRepository.getBooksList();
         emit(BookListLoaded(bookList: bookList));
