@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -33,51 +35,77 @@ class _BookListScreenState extends State<BookListScreen> {
         title: Text(widget.title),
       ),
 
-      body: BlocBuilder<BookListBloc, BookListState>(
-        bloc: _bookListBloc,
-
-        builder: (context, state) {
-          if(state is BookListLoaded){
-            return ListView.separated(
-              padding: const EdgeInsets.only(top: 16),
-              itemCount: state.bookList.length,
-              separatorBuilder: (context, index) => Divider(),
-
-              itemBuilder: (context, i) {
-                final title = state.bookList[i].title;
-                final subtitle = state.bookList[i].authors.join(', ');
-                final thumbnail = state.bookList[i].thumbnail;
-                return ItemsListTile(
-                  theme: theme, 
-                  title: title, 
-                  subtitle: subtitle.toString(), 
-                  thumbnail: thumbnail
-                );
-              }
-            );
-          }
-          if (state is BookListLoadingFail) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset('assets/img/error__okak.jpg', height: 256, width: 256),
-                  Text(
-                    'Произошла ошибка при загрузке данных',
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  Text(
-                    'Проверьте подключение к интернету',
-                    style: theme.textTheme.bodyMedium,
-                  )
-                ],
-              )
-            );
-          }
-          return Center(child: const CircularProgressIndicator());
+      body: RefreshIndicator(
+        onRefresh: () async {
+          final completer = Completer();
+          _bookListBloc.add(LoadBookList(completer: completer));
+          completer.future;
         },
-      )
+        child: BlocBuilder<BookListBloc, BookListState>(
+          bloc: _bookListBloc,
+        
+          builder: (context, state) {
+            if (state is BookListLoaded) {
+              return ListView.separated(
+                padding: const EdgeInsets.only(top: 16),
+                itemCount: state.bookList.length,
+                separatorBuilder: (context, index) => Divider(),
+        
+                itemBuilder: (context, i) {
+                  final title = state.bookList[i].title;
+                  final subtitle = state.bookList[i].authors.join(', ');
+                  final thumbnail = state.bookList[i].thumbnail;
+                  return ItemsListTile(
+                    theme: theme,
+                    title: title,
+                    subtitle: subtitle.toString(),
+                    thumbnail: thumbnail,
+                  );
+                },
+              );
+            }
+            if (state is BookListLoadingFail) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/img/error__okak.jpg',
+                      height: 256,
+                      width: 256,
+                    ),
+        
+                    Text(
+                      'Произошла ошибка при загрузке данных',
+                      style: theme.textTheme.titleMedium,
+                    ),
+        
+                    Text(
+                      'Проверьте подключение к интернету',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+        
+                    SizedBox(height: 30),
+        
+                    FilledButton(
+                      onPressed: () {
+                        _bookListBloc.add(LoadBookList());
+                      },
+                      child: const Text('Повторить'),
+                    ),
+                  ],
+                ),
+              );
+            }
+            if (state is BookListLoading) {
+              return Center(child: const CircularProgressIndicator());
+            } else {
+              return SizedBox();
+            }
+          },
+        ),
+      ),
     );
   }
 }

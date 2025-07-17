@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:storebook/data/models/book.dart';
 import 'package:storebook/data/repositories/abstract_book_repository.dart';
@@ -9,10 +11,15 @@ class BookListBloc extends Bloc<BookListEvent, BookListState> {
   BookListBloc(this.bookRepository) : super(BookListInitial()) {
     on<LoadBookList>((event, emit) async {
       try {
+        emit(BookListLoading());
+
         final bookList = await bookRepository.getBooksList();
         emit(BookListLoaded(bookList: bookList));
       } catch (e) {
         emit(BookListLoadingFail(exception: e));
+      }
+      finally{
+        event.completer?.complete();
       }
     });
   }
