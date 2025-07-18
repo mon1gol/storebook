@@ -25,6 +25,22 @@ class BookListBloc extends Bloc<BookListEvent, BookListState> {
         event.completer?.complete();
       }
     });
+
+    on<LoadBookListBySearch>((event, emit) async {
+      try {
+        if (state is! BookListLoaded) {
+          emit(BookListLoading());          
+        }
+
+        final bookList = await bookRepository.getBooksBySearch(event.searchParam);
+        emit(BookListLoaded(bookList: bookList));
+      } catch (e) {
+        emit(BookListLoadingFail(exception: e));
+      }
+      finally{
+        event.completer?.complete();
+      }
+    });
   }
 
   final AbstractBookRepository bookRepository;

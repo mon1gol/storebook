@@ -35,7 +35,24 @@ class _BookListScreenState extends State<BookListScreen> {
         title: Text(widget.title),
         bottom: PreferredSize(
           preferredSize: Size(50, 100),
-          child: SearchWidget(),
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Поиск...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onChanged: (text) {
+                if (text.isEmpty) {
+                  return;
+                }
+                Future.delayed(Duration(milliseconds: 500));
+                _bookListBloc.add(LoadBookListBySearch(searchParam: text));
+              },
+            ),
+          ),
         ),
       ),
 

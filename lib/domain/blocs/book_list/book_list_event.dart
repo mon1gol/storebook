@@ -10,3 +10,13 @@ class LoadBookList extends BookListEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class LoadBookListBySearch extends BookListEvent {
+  LoadBookListBySearch({this.completer, required this.searchParam});
+
+  final Completer? completer;
+  final String searchParam;
+  
+  @override
+  List<Object?> get props => [completer, searchParam];
+}
