@@ -8,7 +8,7 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 16),
+      padding: EdgeInsets.all(16),
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Поиск...',
