@@ -6,11 +6,9 @@ import 'package:storebook/data/repositories/index.dart';
 class BookRepository implements AbstractBookRepository {
   @override
   Future<List<Book>> getBooksList() async {
-    final apiKey = 'AIzaSyBtPU8LpXihkINUIU2t80py61OqRBgaTRI';
-
     try {
       final response = await Dio().get(
-        'https://www.googleapis.com/books/v1/volumes?q=*&orderBy=newest&maxResults=20&key=$apiKey',
+        'https://www.googleapis.com/books/v1/volumes?q=*&orderBy=newest&maxResults=20',
       );
 
       final items = response.data['items'] as List<dynamic>;
