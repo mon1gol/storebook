@@ -33,6 +33,10 @@ class _BookListScreenState extends State<BookListScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        bottom: PreferredSize(
+          preferredSize: Size(50, 100),
+          child: SearchWidget(),
+        ),
       ),
 
       body: RefreshIndicator(
@@ -43,17 +47,21 @@ class _BookListScreenState extends State<BookListScreen> {
         },
         child: BlocBuilder<BookListBloc, BookListState>(
           bloc: _bookListBloc,
-        
+
           builder: (context, state) {
             if (state is BookListLoaded) {
               return ListView.separated(
                 padding: const EdgeInsets.only(top: 16),
                 itemCount: state.bookList.length,
                 separatorBuilder: (context, index) => Divider(),
-        
+
                 itemBuilder: (context, i) {
                   if (i == 0) {
-                    return HeaderWidget(title: 'Популярные новинки', subtitle: 'За последнее время', theme: theme);
+                    return HeaderWidget(
+                      title: 'Популярные новинки',
+                      subtitle: 'За последнее время',
+                      theme: theme,
+                    );
                   }
                   return ItemsListTile(
                     theme: theme,
@@ -73,19 +81,19 @@ class _BookListScreenState extends State<BookListScreen> {
                       height: 256,
                       width: 256,
                     ),
-        
+
                     Text(
                       'Произошла ошибка при загрузке данных',
                       style: theme.textTheme.titleMedium,
                     ),
-        
+
                     Text(
                       'Проверьте подключение к интернету',
                       style: theme.textTheme.bodyMedium,
                     ),
-        
+
                     SizedBox(height: 30),
-        
+
                     FilledButton(
                       onPressed: () {
                         _bookListBloc.add(LoadBookList());
