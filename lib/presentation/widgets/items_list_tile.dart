@@ -21,14 +21,6 @@ class ItemsListTile extends StatelessWidget {
     );
 
     return ListTile(
-      // title: Text(
-      //   'Бестселлеры',
-      //   style: theme.textTheme.titleLarge, textAlign: TextAlign.center,
-      // ),
-      // subtitle: Text(
-      //   "Подобрали для вас",
-      //   style: theme.textTheme.bodyLarge, textAlign: TextAlign.center,
-      // ),
       title: Text(book.title, style: theme.textTheme.titleMedium),
       subtitle: Text(book.authors.join(', '), style: theme.textTheme.labelLarge),
 

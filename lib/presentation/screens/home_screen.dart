@@ -52,9 +52,12 @@ class _BookListScreenState extends State<BookListScreen> {
                 separatorBuilder: (context, index) => Divider(),
         
                 itemBuilder: (context, i) {
+                  if (i == 0) {
+                    return HeaderWidget(title: 'Популярные новинки', subtitle: 'За последнее время', theme: theme);
+                  }
                   return ItemsListTile(
                     theme: theme,
-                    book: state.bookList[i],
+                    book: state.bookList[i - 1],
                   );
                 },
               );
