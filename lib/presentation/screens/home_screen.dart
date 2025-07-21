@@ -18,11 +18,18 @@ class BookListScreen extends StatefulWidget {
 
 class _BookListScreenState extends State<BookListScreen> {
   final _bookListBloc = BookListBloc(GetIt.I<AbstractBookRepository>());
+  Timer? _searchTimer;
 
   @override
   void initState() {
     _bookListBloc.add(LoadBookList());
     super.initState();
+  }
+
+  @override
+  void dispose(){
+    _searchTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -39,17 +46,19 @@ class _BookListScreenState extends State<BookListScreen> {
             padding: EdgeInsets.all(16),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Поиск...',
+                hintText: 'Поиск по названию, автору или ISBN...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              onChanged: (text) {
+              onChanged: (text) async {
                 if (text.isEmpty) {
                   return;
                 }
-                Future.delayed(Duration(milliseconds: 500));
-                _bookListBloc.add(LoadBookListBySearch(searchParam: text));
+                _searchTimer?.cancel();
+                _searchTimer = Timer(Duration(milliseconds: 500), () {
+                  _bookListBloc.add(LoadBookListBySearch(searchParam: text));
+                });
               },
             ),
           ),

@@ -29,21 +29,24 @@ class BookRepository implements AbstractBookRepository {
   @override
   Future<List<Book>> getBooksBySearch(searchParam) async {
     try {
+      // Подчищаем ввод: убираем лишние пробелы
+      final query = searchParam.trim();
+
+      // Формируем запрос к API
       final uri = Uri.parse(baseUrl).replace(
         queryParameters: {
-          'q': 'intitle:${searchParam.replaceAll(RegExp(r' '), '%20')}', 
-          'maxResults': '20'
+          'q': 'intitle:$query+OR+inauthor:$query+OR+isbn:$query',
+          'maxResults': '20',
         },
       );
 
       final response = await Dio().get(uri.toString());
 
       final items = response.data['items'] as List<dynamic>;
-
-      List<Book> bookList = parseBook(items);
+      final List<Book> bookList = parseBook(items);
 
       return bookList;
-        } catch (e, stackTrace) {
+    } catch (e, stackTrace) {
       debugPrint('BookRepository - getBooksList error: $e\n$stackTrace');
       throw Exception('Ошибка загрузки книг: $e');
     }
@@ -52,7 +55,7 @@ class BookRepository implements AbstractBookRepository {
   List<Book> parseBook(List<dynamic> items) {
     final bookList = items.map((e) {
       final volumeInfo = e['volumeInfo'] as Map<String, dynamic>;
-    
+
       return Book(
         id: e['id'],
         title: volumeInfo['title'] ?? 'Без названия',
