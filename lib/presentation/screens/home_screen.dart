@@ -43,7 +43,19 @@ class _BookListScreenState extends State<BookListScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:
+           [
+            Text(widget.title),
+            IconButton.filledTonal(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/favorites');
+              },
+              icon: Icon(Icons.favorite),
+            )
+          ],
+        ),
         bottom: PreferredSize(
           preferredSize: Size(50, 100),
           child: Padding(
