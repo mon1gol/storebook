@@ -1,19 +1,178 @@
-# storebook
+Начало работы
 
-A new Flutter project.
+## 1. Установка Flutter
 
-## Getting Started
+Если Flutter ещё не установлен, сначала нужно его установить:
 
-This project is a starting point for a Flutter application.
+### Для Windows, macOS, Linux:
+1. Скачай Flutter с официального сайта:  
+   👉 [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
+2. Распакуй архив в нужную папку (например: `C:\src\flutter` или `~/development/flutter`)
+3. Добавь Flutter в переменную окружения `PATH`:
+   - Windows: `C:\src\flutter\bin`
+   - macOS/Linux: `export PATH="$PATH:~/development/flutter/bin"`
+4. Проверь установку:
+   ```bash
+   flutter doctor
+   ```
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 2. Подготовка устройства
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### На выбор:
+- **Физическое устройство** (Android или iOS)
+- **Эмулятор/симулятор**
+- **ПК (Windows, macOS, Linux)**
+- **Web (браузер)**
+
+### Для Android:
+1. Включи режим разработчика на телефоне.
+2. Включи отладку по USB.
+3. Подключи устройство к компьютеру.
+
+### Для эмулятора:
+1. Запусти Android Studio или VS Code.
+2. Открой AVD Manager и создай виртуальное устройство.
+3. Запусти эмулятор.
+
+---
+
+## 3. Получение проекта
+
+Если ты уже клонировал или скачал проект:
+
+```bash
+git clone [link for guthub repo]
+cd storebook
+```
+
+---
+
+## 4. Установка зависимостей
+
+В корне проекта (где находится файл `pubspec.yaml`) выполни команду:
+
+```bash
+flutter pub get
+```
+
+---
+
+## 5. Запуск приложения
+
+### Вариант 1: Через терминал
+
+```bash
+flutter run
+```
+
+> При первом запуске Flutter скачает нужные SDK и соберёт приложение.
+
+### Вариант 2: Через VS Code
+
+1. Открой проект в VS Code.
+2. Нажми `Run and Debug` (или `Run Without Debugging`).
+3. Выбери устройство (например, Android Emulator, Chrome, Windows, macOS и т.д.).
+
+### Вариант 3: Через Android Studio / IntelliJ
+
+1. Открой проект.
+2. Выбери устройство в правом верхнем углу.
+3. Нажми ▶️ `Run`.
+
+---
+
+## 6. Запуск на разных платформах
+
+### Для мобильных устройств (Android/iOS):
+```bash
+flutter run
+```
+
+### Для веба (браузера):
+```bash
+flutter run -d chrome
+```
+
+### Для десктопа (Windows/macOS/Linux):
+```bash
+flutter run -d windows
+flutter run -d macos
+flutter run -d linux
+```
+
+> 💡 Убедись, что нужная десктопная поддержка включена:
+```bash
+flutter config --enable-windows-desktop
+flutter config --enable-macos-desktop
+flutter config --enable-linux-desktop
+```
+
+---
+
+## 7. Тестирование
+
+Ты можешь запускать юнит-тесты и тесты виджетов:
+
+```bash
+flutter test
+```
+
+---
+
+## 8. Сборка релиза
+
+### Android:
+```bash
+flutter build
+flutter build apk
+```
+
+### iOS:
+```bash
+flutter build ios
+```
+
+### Web:
+```bash
+flutter build web
+```
+
+### Десктоп:
+```bash
+flutter build windows
+```
+
+---
+
+## 9. Дополнительные команды
+
+- Просмотр всех доступных устройств:
+  ```bash
+  flutter devices
+  ```
+
+- Запуск на конкретном устройстве:
+  ```bash
+  flutter run -d <device-id>
+  ```
+
+- Обновление зависимостей:
+  ```bash
+  flutter pub upgrade
+  ```
+
+---
+
+## 10. Полезные ссылки
+
+- 📘 Официальная документация: [https://docs.flutter.dev](https://docs.flutter.dev)
+- 📗 Flutter Cookbook: [https://docs.flutter.dev/cookbook](https://docs.flutter.dev/cookbook)
+- 📘 Write your first app: [https://docs.flutter.dev/get-started/codelab](https://docs.flutter.dev/get-started/codelab)
+
+---
+
 
 ========================
 
