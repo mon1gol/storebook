@@ -73,6 +73,7 @@ class BookRepository implements AbstractBookRepository {
               'https://',
             ) ??
             '',
+        publishedDate: volumeInfo['publishedDate'] ?? 'Нет данных о публикации',
       );
     }).toList();
     return bookList;

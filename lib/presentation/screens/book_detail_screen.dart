@@ -14,6 +14,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   String? _bookAuthors;
   String? _bookDescription;
   String? _bookThumbnail;
+  String? _bookPublishedDate;
 
   @override
   void didChangeDependencies() {
@@ -23,6 +24,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     _bookAuthors = args.authors.join(', ');
     _bookDescription = args.description;
     _bookThumbnail = args.thumbnail;
+    _bookPublishedDate = args.publishedDate;
     setState(() {});
   
     super.didChangeDependencies();
@@ -74,6 +76,15 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                 _bookDescription!,
                 style: theme.textTheme.bodyLarge
               ),
+              SizedBox(height: 32),
+              Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  'Дата публикации: ${_bookPublishedDate!}',
+                  style: theme.textTheme.titleMedium
+                ),
+              ),
+              SizedBox(height: 32),
             ],
           ),
         ),

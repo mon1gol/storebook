@@ -7,6 +7,7 @@ class Book extends Equatable{
     required this.authors,
     this.description = '',
     this.thumbnail = '',
+    this.publishedDate = '',
   });
 
   final String id;
@@ -14,7 +15,8 @@ class Book extends Equatable{
   final List<String> authors;
   final String description;
   final String thumbnail;
+  final String publishedDate;
   
   @override
-  List<Object?> get props => [id, title, authors, description, thumbnail];
+  List<Object?> get props => [id, title, authors, description, thumbnail, publishedDate];
 }
