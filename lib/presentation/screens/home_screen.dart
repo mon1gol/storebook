@@ -18,11 +18,15 @@ class BookListScreen extends StatefulWidget {
 
 class _BookListScreenState extends State<BookListScreen> {
   final _bookListBloc = BookListBloc(GetIt.I<AbstractBookRepository>());
+  String _bookWidgetTitle = '';
+  String _bookWidgetSubtitle = '';
   Timer? _searchTimer;
 
   @override
   void initState() {
     _bookListBloc.add(LoadBookList());
+    _bookWidgetTitle = 'Популярные новинки';
+    _bookWidgetSubtitle = 'За последнее время';
     super.initState();
   }
 
@@ -55,6 +59,8 @@ class _BookListScreenState extends State<BookListScreen> {
                 if (text.isEmpty) {
                   return;
                 }
+                _bookWidgetTitle = 'Результаты поиска';
+                _bookWidgetSubtitle = '';
                 _searchTimer?.cancel();
                 _searchTimer = Timer(Duration(milliseconds: 500), () {
                   _bookListBloc.add(LoadBookListBySearch(searchParam: text));
@@ -69,6 +75,8 @@ class _BookListScreenState extends State<BookListScreen> {
         onRefresh: () async {
           final completer = Completer();
           _bookListBloc.add(LoadBookList(completer: completer));
+          _bookWidgetTitle = 'Популярные новинки';
+          _bookWidgetSubtitle = 'За последнее время';
           return completer.future;
         },
         child: BlocBuilder<BookListBloc, BookListState>(
@@ -84,8 +92,8 @@ class _BookListScreenState extends State<BookListScreen> {
                 itemBuilder: (context, i) {
                   if (i == 0) {
                     return HeaderWidget(
-                      title: 'Популярные новинки',
-                      subtitle: 'За последнее время',
+                      title: _bookWidgetTitle,
+                      subtitle: _bookWidgetSubtitle,
                       theme: theme,
                     );
                   }
