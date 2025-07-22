@@ -6,7 +6,6 @@ import 'package:get_it/get_it.dart';
 import 'package:storebook/data/repositories/index.dart';
 import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
 import 'package:storebook/presentation/widgets/index.dart';
-import 'package:storebook/presentation/widgets/load_error_widget.dart';
 
 class BookListScreen extends StatefulWidget {
   const BookListScreen({super.key, required this.title});
@@ -44,19 +43,7 @@ class _BookListScreenState extends State<BookListScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-           [
-            Text(widget.title),
-            IconButton.filledTonal(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/favorites');
-              },
-              icon: Icon(Icons.favorite),
-            )
-          ],
-        ),
+        title: Text(widget.title),
         bottom: PreferredSize(
           preferredSize: Size(50, 100),
           child: Padding(
