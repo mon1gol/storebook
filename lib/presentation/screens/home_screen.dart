@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:storebook/data/repositories/index.dart';
 import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
 import 'package:storebook/presentation/widgets/index.dart';
+import 'package:storebook/presentation/widgets/load_error_widget.dart';
 
 class BookListScreen extends StatefulWidget {
   const BookListScreen({super.key, required this.title});
@@ -117,38 +118,7 @@ class _BookListScreenState extends State<BookListScreen> {
               );
             }
             if (state is BookListLoadingFail) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/img/error__okak.jpg',
-                      height: 256,
-                      width: 256,
-                    ),
-
-                    Text(
-                      'Произошла ошибка при загрузке данных',
-                      style: theme.textTheme.titleMedium,
-                    ),
-
-                    Text(
-                      'Проверьте подключение к интернету',
-                      style: theme.textTheme.bodyMedium,
-                    ),
-
-                    SizedBox(height: 30),
-
-                    FilledButton(
-                      onPressed: () {
-                        _bookListBloc.add(LoadBookList());
-                      },
-                      child: const Text('Повторить'),
-                    ),
-                  ],
-                ),
-              );
+              return LoadErrorWidget(theme: theme, bookListBloc: _bookListBloc);
             }
             if (state is BookListLoading) {
               return Center(child: const CircularProgressIndicator());
