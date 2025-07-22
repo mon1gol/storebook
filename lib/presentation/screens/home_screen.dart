@@ -41,6 +41,7 @@ class _BookListScreenState extends State<BookListScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      bottomNavigationBar: NavigationBarWidget(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
