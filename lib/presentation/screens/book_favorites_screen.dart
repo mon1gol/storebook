@@ -24,7 +24,9 @@ class _BookFavoritesScreenState extends State<BookFavoritesScreen> {
         title: const Text('Избранное'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: SingleChildScrollView()
+      body: SingleChildScrollView(
+        
+      )
     );
   }
 }
