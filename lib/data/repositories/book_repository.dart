@@ -14,9 +14,7 @@ class BookRepository implements AbstractBookRepository {
       );
 
       final response = await Dio().get(uri.toString());
-
       final items = response.data['items'] as List<dynamic>? ?? [];
-
       final List<Book> bookList = Book.fromJson(items);
 
       return bookList;
@@ -41,7 +39,6 @@ class BookRepository implements AbstractBookRepository {
       );
 
       final response = await Dio().get(uri.toString());
-
       final items = response.data?['items'] as List<dynamic>? ?? [];
       final List<Book> bookList = Book.fromJson(items);
 
