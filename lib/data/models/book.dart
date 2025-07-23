@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'book.g.dart';
+
+@HiveType(typeId: 1)
 class Book extends Equatable {
   const Book({
     required this.id,
@@ -10,12 +14,19 @@ class Book extends Equatable {
     this.publishedDate = '',
   });
 
+  @HiveField(1)
   final String id;
+  @HiveField(2)
   final String title;
+  @HiveField(3)
   final List<String> authors;
+  @HiveField(4)
   final String description;
+  @HiveField(5)
   final String thumbnail;
+  @HiveField(6)
   final String publishedDate;
+  @HiveField(7)
 
   static List<Book> fromJson(List<dynamic> items) {
     final bookList = items.map((e) {
