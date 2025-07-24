@@ -17,7 +17,9 @@ void main() async {
   const favoritesBookBoxName = 'favorites_book_box';
   final favoritesBookBox = await Hive.openBox<Book>(favoritesBookBoxName);
   
-  GetIt.I.registerLazySingleton<AbstractBookRepository>(() => BookRepository());
+  GetIt.I.registerLazySingleton<AbstractBookRepository>(
+    () => BookRepository()
+  );
   GetIt.I.registerLazySingleton<AbstractLocalBookRepository>(
     () => BookFavoritesRepository(favoritesBox: favoritesBookBox)
   );

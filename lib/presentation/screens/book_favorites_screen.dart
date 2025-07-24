@@ -17,8 +17,6 @@ class _BookFavoritesScreenState extends State<BookFavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Избранное'),

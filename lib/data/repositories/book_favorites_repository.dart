@@ -23,14 +23,11 @@ class BookFavoritesRepository implements AbstractLocalBookRepository {
 
   @override
   Future<bool> isFavorite(String bookId) async {
-    // TODO: implement isFavorite
     throw UnimplementedError();
   }
 
   @override
   Future<void> removeBook(String bookId) async {
-    // TODO: implement removeBook
     throw UnimplementedError();
   }
-  
 }
