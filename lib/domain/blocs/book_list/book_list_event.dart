@@ -20,3 +20,17 @@ class LoadBookListBySearch extends BookListEvent {
   @override
   List<Object?> get props => [completer, searchParam];
 }
+
+class AddBookToFavorites extends BookListEvent {
+  AddBookToFavorites({required this.book});
+
+  final Book book;
+  
+  @override
+  List<Object?> get props => [book];
+}
+
+class GetFavorites extends BookListEvent {
+  @override
+  List<Object?> get props => [];
+}

@@ -12,6 +12,7 @@ class Book extends Equatable {
     this.description = '',
     this.thumbnail = '',
     this.publishedDate = '',
+    this.isFavorite = false,
   });
 
   @HiveField(1)
@@ -27,6 +28,7 @@ class Book extends Equatable {
   @HiveField(6)
   final String publishedDate;
   @HiveField(7)
+  final bool isFavorite;
 
   static List<Book> fromJson(List<dynamic> items) {
     final bookList = items.map((e) {
@@ -55,6 +57,16 @@ class Book extends Equatable {
     return bookList;
   }
 
+  Book copyWith({bool? isFavorite}) {
+    return Book(
+      id: id,
+      title: title,
+      authors: authors,
+      thumbnail: thumbnail,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
+
   @override
   List<Object?> get props => [
     id,
@@ -63,5 +75,6 @@ class Book extends Equatable {
     description,
     thumbnail,
     publishedDate,
+    isFavorite,
   ];
 }

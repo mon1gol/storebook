@@ -17,7 +17,10 @@ class BookListScreen extends StatefulWidget {
 }
 
 class _BookListScreenState extends State<BookListScreen> {
-  final _bookListBloc = BookListBloc(GetIt.I<AbstractBookRepository>());
+  final _bookListBloc = BookListBloc(
+    GetIt.I<AbstractBookRepository>(),
+    GetIt.I<AbstractLocalBookRepository>(), 
+  );
   String _bookWidgetTitle = '';
   String _bookWidgetSubtitle = '';
   Timer? _searchTimer;
@@ -101,6 +104,8 @@ class _BookListScreenState extends State<BookListScreen> {
                   return ItemsListTile(
                     theme: theme,
                     book: state.bookList[i - 1],
+                    bookListBloc: _bookListBloc,
+                    isFavorites: false,
                   );
                 },
               );

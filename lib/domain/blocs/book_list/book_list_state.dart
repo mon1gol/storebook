@@ -29,3 +29,22 @@ class BookListLoadingFail extends BookListState{
   @override
   List<Object?> get props => [exception];
 }
+
+class BookAdded extends BookListState{
+  @override
+  List<Object?> get props => [];
+}
+
+class BookAdding extends BookListState{
+  @override
+  List<Object?> get props => [];
+}
+
+class BookAddingFail extends BookListState{
+  BookAddingFail({required this.exception});
+  
+  final Object? exception;
+
+  @override
+  List<Object?> get props => [];
+}
