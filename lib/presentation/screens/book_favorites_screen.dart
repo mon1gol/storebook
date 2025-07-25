@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:storebook/data/repositories/abstract_book_repository.dart';
-import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
+import 'package:storebook/presentation/blocs/book_list/book_list_bloc.dart';
 import 'package:storebook/presentation/widgets/index.dart';
 
 class BookFavoritesScreen extends StatefulWidget {

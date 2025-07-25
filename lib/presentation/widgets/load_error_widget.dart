@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
+import 'package:storebook/presentation/blocs/book_list/book_list_bloc.dart';
 
 class LoadErrorWidget extends StatelessWidget {
   const LoadErrorWidget({

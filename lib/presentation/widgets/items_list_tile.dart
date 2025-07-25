@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:storebook/data/models/book.dart';
-import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
+import 'package:storebook/presentation/blocs/book_list/book_list_bloc.dart';
 
 class ItemsListTile extends StatelessWidget {
   const ItemsListTile({super.key, required this.theme, required this.book, required this.bookListBloc, required this.isFavorites});

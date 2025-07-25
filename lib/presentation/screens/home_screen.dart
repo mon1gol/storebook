@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:storebook/data/repositories/index.dart';
-import 'package:storebook/domain/blocs/book_list/book_list_bloc.dart';
+import 'package:storebook/presentation/blocs/book_list/book_list_bloc.dart';
 import 'package:storebook/presentation/widgets/index.dart';
 
 class BookListScreen extends StatefulWidget {
@@ -46,7 +46,7 @@ class _BookListScreenState extends State<BookListScreen> {
     return Scaffold(
       bottomNavigationBar: NavigationBarWidget(),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: theme.colorScheme.inversePrimary,
         title: Text(widget.title),
         bottom: PreferredSize(
           preferredSize: Size(50, 100),
